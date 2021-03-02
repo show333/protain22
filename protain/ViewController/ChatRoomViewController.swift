@@ -13,6 +13,7 @@ import FirebaseAuth
 class ChatRoomViewController: UIViewController {
     
     
+    
     var dragons: Animal?
 
     private var rurubus = [Message]()
@@ -74,17 +75,14 @@ class ChatRoomViewController: UIViewController {
                     let message = Message(dic: dic)
                     self.rurubus.append(message)
                     self.chatRoomTableView.reloadData()
-                    print("ディックディく: ",dic)
+//                    print("チャットルームないのでーーーーーた: ",dic)
                     
                 case .modified, .removed:
                     print("ナッシング")
                 }
-                
             })
         }
-        
     }
-    
 }
 
 extension ChatRoomViewController: ChatInputAccessoryViewDelegate {
@@ -94,9 +92,9 @@ extension ChatRoomViewController: ChatInputAccessoryViewDelegate {
 //        rurubus.append(text)
 //        chatInputAccessoryView.removeText()
 //        chatRoomTableView.reloadData()
-        print("カメハメハハウス")
-        print(dragons!)
-        print(dragons!.documentId)
+//        print("チャットルーム内の送信ボタンが押された！")
+//        print(dragons!)
+//        print(dragons!.documentId)
         chatInputAccessoryView.removeText()
         
         let chatRoomDocId = dragons!.documentId
@@ -119,13 +117,9 @@ extension ChatRoomViewController: ChatInputAccessoryViewDelegate {
     //              let saveDocument = Firestore.firestore()
     //               let user = Auth.auth().currentUser
 
-                Firestore.firestore().collection("Rooms").document("karano").collection("kokoniireru").document(chatRoomDocId).updateData([
-                    
-                    "users" : FieldValue.arrayUnion([uid])
-                
-                ])
+            //Arrayのやり方は後で今はこのやり方でcountする。
+            Firestore.firestore().collection("Rooms").document("karano").collection("kokoniireru").document(chatRoomDocId).collection("members").document("membersId").updateData([uid:uid])
         }
-        
     }
 }
 

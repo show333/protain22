@@ -6,3 +6,12 @@
 //
 
 import Foundation
+import Firebase
+
+class Team {
+    public var teamcolor : String
+    
+    init(dic: [String:Any]){
+        self.teamcolor = dic["message"] as? String ?? ""
+    }
+}
